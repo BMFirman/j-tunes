@@ -15,17 +15,23 @@ class JTunes {
             commandList.add("osascript");
 
             if (args.length == 0) {
-                commandList.add("playPause.scpt");
+                commandList.add("scripts/playPause.scpt");
 
             } else if (args[0].equals("pp")) {
-                commandList.add("playPause.scpt");
+                commandList.add("scripts/playPause.scpt");
 
             } else if (args[0].equals("pl")) {
-                commandList.add("script.scpt"); 
-                playPlaylist(args[1]);
-                
+                commandList.add("scripts/script.scpt"); 
+                writePlaylist(args[1]);
+
+            } else if (args[0].equals("n")) {
+                commandList.add("scripts/nextTrack.scpt");
+
+            } else if (args[0].equals("pr")) {
+                commandList.add("scripts/nextTrack.scpt");
+
             } else {
-                commandList.add("playPause.scpt");
+                commandList.add("scripts/playPause.scpt");
             }
  
             executor(commandList);
@@ -42,7 +48,7 @@ class JTunes {
         System.out.println("command: " + build.command());        
     }
 
-    static void playPlaylist(String playlistName) {
+    static void writePlaylist(String playlistName) {
         String output =
         "tell application \"iTunes\"\n" +
         "  play the playlist named \"" +
@@ -72,7 +78,8 @@ class JTunes {
     public static Formatter initFormatter(String filename, String workingDirectory, Formatter output) {
 
         try {
-            output = new Formatter(Paths.get(workingDirectory) + "/" + filename);
+            output = new Formatter(Paths.get(workingDirectory) + "/scripts/" + filename);
+            System.out.println(Paths.get(workingDirectory) + "/scripts/" + filename);
         } catch (SecurityException secExc) {
             System.err.println("Can't write to .scpt!");
             System.exit(1);

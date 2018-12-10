@@ -11,6 +11,8 @@ This program makes use of built to order applescipts, and premade applescripts t
 Music will play/pause if no flags speciifed
 $pp                   #play/pause track
 $pl <playlist-name>   #currently limited to playlists with no spaces in name
+$n                    #play next track
+$pr                   #play previous track
 ```
 
 ## Contributors
