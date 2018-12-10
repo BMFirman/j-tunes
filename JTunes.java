@@ -23,6 +23,9 @@ class JTunes {
             } else if (args[0].equals("pl")) {
                 commandList.add("script.scpt"); 
                 playPlaylist(args[1]);
+                
+            } else {
+                commandList.add("playPause.scpt");
             }
  
             executor(commandList);
