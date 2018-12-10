@@ -18,6 +18,9 @@ $pr                   # play previous track
 $l                    # list information of current track
 $s                    # shuffle state on
 $so                   # shuffle state off
+$r                    # repeat on
+$r1                   # single track repeat on
+$ro                   # repeat off
 ```
 
 ## Contributors

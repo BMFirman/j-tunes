@@ -53,6 +53,19 @@ class JTunes {
                 commandList.add("scripts/script.scpt");
                 writeSong(args);
 
+            } else if (args[0].equals("r")) {
+
+                commandList.add("scripts/repeatAll.scpt");
+
+            } else if (args[0].equals("ro")) {
+
+                commandList.add("scripts/repeatOff.scpt");
+            
+            } else if (args[0].equals("r1")) {
+
+                commandList.add("scripts/repeatOne.scpt");
+                writeSong(args);
+
             } else {
                 commandList.add("scripts/playPause.scpt");
             }
