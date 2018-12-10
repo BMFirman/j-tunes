@@ -8,68 +8,15 @@ import java.util.FormatterClosedException;
 import java.nio.file.Paths;
 
 class JTunes {
+    public static boolean scriptOutputFlag = false;
+
     public static void main(String[] args) throws IOException {
         
         try {
-            boolean scriptOutputFlag = false;
+            
             List<String> commandList = new ArrayList<String>();
             commandList.add("osascript");
-
-            if (args.length == 0) {
-
-                commandList.add("scripts/playPause.scpt");
-
-            } else if (args[0].equals("pp")) {
-
-                commandList.add("scripts/playPause.scpt");
-
-            } else if (args[0].equals("pl")) {
-
-                commandList.add("scripts/script.scpt"); 
-                writePlaylist(args);
-
-            } else if (args[0].equals("n")) {
-
-                commandList.add("scripts/nextTrack.scpt");
-
-            } else if (args[0].equals("pr")) {
-
-                commandList.add("scripts/nextTrack.scpt");
-
-            } else if (args[0].equals("l")) {
-
-                commandList.add("scripts/trackinfo.scpt");
-                scriptOutputFlag = true;
-
-            } else if (args[0].equals("s")) {
-
-                commandList.add("scripts/shuffleOn.scpt");
-
-            } else if (args[0].equals("so")) {
-
-                commandList.add("scripts/shuffleOff.scpt");
-            
-            } else if (args[0].equals("t")) {
-
-                commandList.add("scripts/script.scpt");
-                writeSong(args);
-
-            } else if (args[0].equals("r")) {
-
-                commandList.add("scripts/repeatAll.scpt");
-
-            } else if (args[0].equals("ro")) {
-
-                commandList.add("scripts/repeatOff.scpt");
-            
-            } else if (args[0].equals("r1")) {
-
-                commandList.add("scripts/repeatOne.scpt");
-                writeSong(args);
-
-            } else {
-                commandList.add("scripts/playPause.scpt");
-            }
+            commandList.add(commandSelector(args));
  
             executor(commandList, scriptOutputFlag);
 
@@ -78,6 +25,69 @@ class JTunes {
             System.out.println("No flag was provided.");
         }
 
+    }
+
+    static String commandSelector(String[] args) throws ArrayIndexOutOfBoundsException {
+            
+            if (args.length == 0) {
+
+                return "scripts/playPause.scpt";
+
+            } else if (args[0].equals("pp")) {
+
+                return "scripts/playPause.scpt";
+
+            } else if (args[0].equals("pl")) {
+
+                writePlaylist(args);
+                return "scripts/script.scpt"; 
+                
+
+            } else if (args[0].equals("n")) {
+
+                return "scripts/nextTrack.scpt";
+
+            } else if (args[0].equals("pr")) {
+
+                return "scripts/nextTrack.scpt";
+
+            } else if (args[0].equals("l")) {
+
+                setScriptOutputFlag(); 
+                return "scripts/trackinfo.scpt";
+
+            } else if (args[0].equals("s")) {
+
+                return "scripts/shuffleOn.scpt";
+
+            } else if (args[0].equals("so")) {
+
+                return "scripts/shuffleOff.scpt";
+            
+            } else if (args[0].equals("t")) {
+                
+                writeSong(args);
+                return "scripts/script.scpt"; 
+
+            } else if (args[0].equals("r")) {
+
+                return "scripts/repeatAll.scpt";
+
+            } else if (args[0].equals("ro")) {
+
+                return "scripts/repeatOff.scpt";
+            
+            } else if (args[0].equals("r1")) {
+
+                return "scripts/repeatOne.scpt";
+
+            } else {
+                return "scripts/playPause.scpt";
+            }
+    }
+
+    public static void setScriptOutputFlag() {
+        scriptOutputFlag = true;
     }
 
     // scriptOutputflag toggles printing of script output
