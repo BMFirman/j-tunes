@@ -30,6 +30,9 @@ class JTunes {
             } else if (args[0].equals("pr")) {
                 commandList.add("scripts/nextTrack.scpt");
 
+            } else if (args[0].equals("l")) {
+                commandList.add("scripts/trackinfo.scpt");
+
             } else {
                 commandList.add("scripts/playPause.scpt");
             }
@@ -45,7 +48,8 @@ class JTunes {
     static void executor(List<String> commandList) throws IOException {
         ProcessBuilder build = new ProcessBuilder(commandList); 
         Process p = build.start();
-        System.out.println("command: " + build.command());        
+        // System.out.println("command: " + build.command());        
+        getCurrentSong(p);
     }
 
     static void writePlaylist(String playlistName) {
@@ -74,6 +78,18 @@ class JTunes {
         output.close();
     }
 
+    static void getCurrentSong(Process process) throws IOException {
+        BufferedReader reader = 
+                new BufferedReader(new InputStreamReader(process.getInputStream()));
+        StringBuilder builder = new StringBuilder();
+        String line = null;
+        while ( (line = reader.readLine()) != null) {
+            builder.append(line);
+        //builder.append(System.getProperty("line.separator"));
+        }
+        String result = builder.toString();
+        System.out.println(result);   
+    }
 
     public static Formatter initFormatter(String filename, String workingDirectory, Formatter output) {
 
