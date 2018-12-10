@@ -23,5 +23,15 @@ $r1                   # single track repeat on
 $ro                   # repeat off
 ```
 
+## Instalation
+Only tested with ZSH, add the following to .zshrc
+```
+export CLASSPATH=.:/Users/username/location_of_cloned_project/jtunes
+
+jt() {
+    java JTunes $@
+}
+```
+
 ## Contributors
 * [BMFirman](https://github.com/BMFirman/)
