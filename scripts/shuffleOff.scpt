@@ -4,7 +4,7 @@ tell application "System Events"
     set controlsMenu to itunesMenuBar's menu bar item "Controls"'s first menu
     set shuffleMenu to controlsMenu's menu item "Shuffle"'s first menu
 
-    set shuffleOnMenuItem to shuffleMenu's menu item "On"
+    set shuffleOnMenuItem to shuffleMenu's menu item "Off"
     set shuffleSongsMenuItem to shuffleMenu's menu item "Songs"
 
     tell process "iTunes"

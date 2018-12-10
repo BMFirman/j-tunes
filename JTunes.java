@@ -11,6 +11,7 @@ class JTunes {
         
 
         try {
+            boolean scriptOutputFlag = false;
             List<String> commandList = new ArrayList<String>();
             commandList.add("osascript");
 
@@ -32,12 +33,19 @@ class JTunes {
 
             } else if (args[0].equals("l")) {
                 commandList.add("scripts/trackinfo.scpt");
+                scriptOutputFlag = true;
+
+            } else if (args[0].equals("s")) {
+                commandList.add("scripts/shuffleOn.scpt");
+
+            } else if (args[0].equals("so")) {
+                commandList.add("scripts/shuffleOff.scpt");
 
             } else {
                 commandList.add("scripts/playPause.scpt");
             }
  
-            executor(commandList);
+            executor(commandList, scriptOutputFlag);
 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("No flag was provided.");
@@ -45,11 +53,13 @@ class JTunes {
 
     }
 
-    static void executor(List<String> commandList) throws IOException {
+    static void executor(List<String> commandList, boolean scriptOutputFlag) throws IOException {
         ProcessBuilder build = new ProcessBuilder(commandList); 
         Process p = build.start();
         // System.out.println("command: " + build.command());        
-        getCurrentSong(p);
+        if (scriptOutputFlag == true) { 
+            getScriptOutput(p);
+        }
     }
 
     static void writePlaylist(String playlistName) {
@@ -78,7 +88,7 @@ class JTunes {
         output.close();
     }
 
-    static void getCurrentSong(Process process) throws IOException {
+    static void getScriptOutput(Process process) throws IOException {
         BufferedReader reader = 
                 new BufferedReader(new InputStreamReader(process.getInputStream()));
         StringBuilder builder = new StringBuilder();
