@@ -1,4 +1,3 @@
-package jtunes;
 import java.lang.*; 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,6 +13,11 @@ class JTunes {
         
         try {
             
+            if (args[0].equals("h")) {
+                helpPrintout();
+                System.exit(0);
+            }
+
             List<String> commandList = new ArrayList<String>();
             commandList.add("osascript");
             commandList.add(commandSelector(args));
@@ -88,6 +92,22 @@ class JTunes {
 
     public static void setScriptOutputFlag() {
         scriptOutputFlag = true;
+    }
+
+    static void helpPrintout() {
+        System.out.println("Music will play/pause if no flags speciifed\n");
+        System.out.println(" pp                   # play/pause track");
+        System.out.println(" pl <playlist-name>   # play specified playlist");
+        System.out.println(" t  <track-name>      # play specified track");
+        System.out.println(" n                    # play next track");
+        System.out.println(" pr                   # play previous track");
+        System.out.println(" l                    # list information of current track");
+        System.out.println(" s                    # shuffle state on");
+        System.out.println(" so                   # shuffle state off");
+        System.out.println(" r                    # repeat on");
+        System.out.println(" r1                   # single track repeat on");
+        System.out.println(" ro                   # repeat off");
+        System.out.print(" h                    # print help");
     }
 
     // scriptOutputflag toggles printing of script output

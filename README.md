@@ -21,6 +21,7 @@ $so                   # shuffle state off
 $r                    # repeat on
 $r1                   # single track repeat on
 $ro                   # repeat off
+$h                    # print help
 ```
 
 ## Instalation
